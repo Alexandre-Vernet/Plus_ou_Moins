@@ -18,26 +18,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewBox"
+            android:id="@+id/textViewInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
+            android:text="@string/enter_a_number_between_0_and_1000"
             android:textAlignment="center"
             android:textSize="27sp" />
 
         <TextView
-            android:id="@+id/triesNumber"
+            android:id="@+id/textViewCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
-            android:text="Counts : 3"
+            android:text="@string/counts"
             android:textColor="@color/white"
             android:textSize="23sp" />
 
@@ -46,9 +46,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=""
-            android:hint="Enter a number"
+            android:hint="@string/enter_a_number"
             android:inputType="number"
+            android:maxLength="4"
+            android:text="500"
+            android:textColor="@color/white"
             android:textSize="30sp" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:padding="25dp"
+        android:text="@string/validate"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

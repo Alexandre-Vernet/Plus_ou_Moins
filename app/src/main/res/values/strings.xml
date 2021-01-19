@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Plus ou Moins</string>
+    <string name="number_bigger">The mystery number is bigger !</string>
+    <string name="number_lower">The mystery number is lower !</string>
+    <string name="win">You win in %1$d trials</string>
+    <string name="enter_a_number_between_0_and_1000">Enter a number between 0 and 1000</string>
+    <string name="counts">Counts : %1$d</string>
+    <string name="enter_a_number">Enter a number</string>
+    <string name="textbox_empty">Textbox cannot be empty</string>
+    <string name="validate">Validate</string>
+    <string name="replay">Replay</string>
 </resources>
