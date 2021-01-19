@@ -9,4 +9,6 @@
     <string name="textbox_empty">Textbox cannot be empty</string>
     <string name="validate">Validate</string>
     <string name="replay">Replay</string>
+    <string name="leave">Leave</string>
+    <string name="want_leave">Do you want to leave ?</string>
 </resources>

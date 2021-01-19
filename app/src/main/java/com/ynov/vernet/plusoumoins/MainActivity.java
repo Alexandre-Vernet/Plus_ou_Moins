@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     int count = 0;
 
-    // Débug
+    // Debug
     private static final String TAG = "MainActivity";
 
     @Override
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (userNumber > mysteryNumber)
                     textViewInfo.setText(R.string.number_lower);
 
-
+                // Update color, vibrate and increment count
                 textViewInfo.setTextColor(getResources().getColor(R.color.red));
                 Vibrator vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
                 if (vibe != null) {
@@ -75,14 +76,17 @@ public class MainActivity extends AppCompatActivity {
 
                 /*Win*/
                 if (userNumber == mysteryNumber) {
+
+                    // Update text and color
                     textViewInfo.setText(getString(R.string.win, count));
                     textViewInfo.setTextColor(getResources().getColor(R.color.blue));
+
+                    // Hide edit text
                     editTextNumber.setVisibility(View.INVISIBLE);
 
-                    // Replay
+                    // Button replay
                     btnValidate.setText(R.string.replay);
                     btnValidate.setOnClickListener(view -> {
-
                     });
                 }
 
@@ -104,5 +108,20 @@ public class MainActivity extends AppCompatActivity {
         int max = 1000;
         Random r = new Random();
         return r.nextInt(max - min + 1) + min;
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.leave)
+                .setMessage(R.string.want_leave)
+                .setPositiveButton("Oui", (dialogInterface, i) -> {
+                    super.onBackPressed();
+                    finish();
+                })
+                .setNegativeButton("Non", null)
+                .show();
+        alertDialog.setCanceledOnTouchOutside(false);
     }
 }
