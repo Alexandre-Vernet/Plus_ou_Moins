@@ -5,8 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -28,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
     int mysteryNumber;
     int count = 0;
 
-    // Debug
-    private static final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Save mystery number
         mysteryNumber = mysteryNumber();
-        Log.d(TAG, "onCreate: " + mysteryNumber);
 
         // Display count
         textViewCount.setText(getString(R.string.counts, count));
@@ -154,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Choose a new mystery number
         mysteryNumber = mysteryNumber();
-        Log.d(TAG, "onCreate: " + mysteryNumber);
 
         // Start new game
         btnValidate.setOnClickListener(view -> game());
