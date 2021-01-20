@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Plus ou Moins</string>
+    <string name="number_bigger">Le nombre mystère est plus grand !</string>
+    <string name="number_lower">Le nombre mystère est plus petit !</string>
+    <string name="win">Vous avez gagné en %1$d essais</string>
+    <string name="enter_a_number_between_0_and_1000">Entrez un nombre entre 0 et 1000</string>
+    <string name="counts">Essais : %1$d</string>
+    <string name="textbox_empty">La zone de texte ne peut pas être vide</string>
+    <string name="validate">Valider</string>
+    <string name="replay">Rejouer</string>
+    <string name="leave">Quitter</string>
+    <string name="want_leave">Voulez-vous vraiment quitter ?</string>
+    <string name="no">Non</string>
+    <string name="yes">Oui</string>
+</resources>

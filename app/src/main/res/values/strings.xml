@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Plus ou Moins</string>
+    <string name="app_name">Bigger or Smaller</string>
     <string name="number_bigger">The mystery number is bigger !</string>
     <string name="number_lower">The mystery number is lower !</string>
     <string name="win">You won in %1$d trials</string>
