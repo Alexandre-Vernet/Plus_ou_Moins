@@ -7,6 +7,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         textViewInfo = findViewById(R.id.textViewInfo);
         textViewCount = findViewById(R.id.textViewCount);
-        editTextNumber = findViewById(R.id.editTextNumber);
+        editTextNumber = (EditText) findViewById(R.id.editTextNumber);
         btnValidate = findViewById(R.id.btnValidate);
+
+        editTextNumber.requestFocus();
+
 
         // Save mystery number
         mysteryNumber = mysteryNumber();
@@ -45,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Display count
         textViewCount.setText(getString(R.string.counts, count));
+
+        // Press button
+        btnValidate.setOnClickListener(v -> {
+            game();
+        });
 
         // Enter keyboard
         editTextNumber.setOnKeyListener((v, keyCode, event) -> {
@@ -85,12 +94,20 @@ public class MainActivity extends AppCompatActivity {
             textViewInfo.setText(R.string.number_lower);
 
         // Update color, vibrate and increment count
-        textViewInfo.setTextColor(getResources().getColor(R.color.red));
-        Vibrator vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        if (vibe != null) {
-            vibe.vibrate(200);
+        if (userNumber != mysteryNumber) {
+            textViewInfo.setTextColor(getResources().getColor(R.color.red));
+            Vibrator vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+            if (vibe != null) {
+                vibe.vibrate(400);
+            }
+            count++;
+
+            // Open keyboard
+            editTextNumber.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(editTextNumber, InputMethodManager.SHOW_IMPLICIT);
         }
-        count++;
+
 
         /*Win*/
         if (userNumber == mysteryNumber) {
@@ -109,9 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Update count
         textViewCount.setText(getString(R.string.counts, count));
-
-        // Open keyboard
-        editTextNumber.requestFocus();
     }
 
     public void replay() {
@@ -134,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         mysteryNumber = mysteryNumber();
         Log.d(TAG, "onCreate: " + mysteryNumber);
 
+        // Start new game
         btnValidate.setOnClickListener(view -> game());
     }
 
