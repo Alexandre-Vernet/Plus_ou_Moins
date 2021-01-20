@@ -17,6 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="@string/counts"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,16 +42,8 @@
             android:layout_marginBottom="50dp"
             android:text="@string/enter_a_number_between_0_and_1000"
             android:textAlignment="center"
+            android:textColor="@color/grey"
             android:textSize="27sp" />
-
-        <TextView
-            android:id="@+id/textViewCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="@string/counts"
-            android:textColor="@color/white"
-            android:textSize="23sp" />
 
         <EditText
             android:id="@+id/editTextNumber"
@@ -49,7 +53,6 @@
             android:hint="@string/enter_a_number"
             android:inputType="number"
             android:maxLength="4"
-            android:text="500"
             android:textColor="@color/white"
             android:textSize="30sp" />
     </LinearLayout>

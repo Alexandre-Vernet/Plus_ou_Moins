@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextNumber;
     Button btnValidate;
 
+    int mysteryNumber;
     int count = 0;
+
 
     // Debug
     private static final String TAG = "MainActivity";
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btnValidate = findViewById(R.id.btnValidate);
 
         // Save mystery number
-        int mysteryNumber = mysteryNumber();
+        mysteryNumber = mysteryNumber();
         Log.d(TAG, "onCreate: " + mysteryNumber);
 
         // Display count
@@ -47,55 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // Enter keyboard
         editTextNumber.setOnKeyListener((v, keyCode, event) -> {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                // Get user number from editText
-                String value = editTextNumber.getText().toString();
-
-                // Empty edit text
-                if (value.isEmpty()) {
-                    editTextNumber.setError(getString(R.string.textbox_empty));
-                    new Handler().postDelayed((Runnable) () -> editTextNumber.setError(null), 1000);
-                    return false;
-                }
-
-                // Convert value to int
-                int userNumber = Integer.parseInt(value);
-
-                // Compare userNumber and mysteryNumber
-                if (userNumber < mysteryNumber)
-                    textViewInfo.setText(R.string.number_bigger);
-                else if (userNumber > mysteryNumber)
-                    textViewInfo.setText(R.string.number_lower);
-
-                // Update color, vibrate and increment count
-                textViewInfo.setTextColor(getResources().getColor(R.color.red));
-                Vibrator vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-                if (vibe != null) {
-                    vibe.vibrate(200);
-                }
-                count++;
-
-                /*Win*/
-                if (userNumber == mysteryNumber) {
-
-                    // Update text and color
-                    textViewInfo.setText(getString(R.string.win, count));
-                    textViewInfo.setTextColor(getResources().getColor(R.color.blue));
-
-                    // Hide edit text
-                    editTextNumber.setVisibility(View.INVISIBLE);
-
-                    // Button replay
-                    btnValidate.setText(R.string.replay);
-                    btnValidate.setOnClickListener(view -> {
-                    });
-                }
-
-                // Update count
-                textViewCount.setText(getString(R.string.counts, count));
-
-                // Open keyboard
-                editTextNumber.requestFocus();
-
+                game();
                 return true;
             }
             return false;
@@ -110,17 +64,90 @@ public class MainActivity extends AppCompatActivity {
         return r.nextInt(max - min + 1) + min;
     }
 
+    public void game() {
+
+        // Get user number from editText
+        String value = editTextNumber.getText().toString();
+
+        // Empty edit text
+        if (value.isEmpty()) {
+            editTextNumber.setError(getString(R.string.textbox_empty));
+            new Handler().postDelayed((Runnable) () -> editTextNumber.setError(null), 1000);
+        }
+
+        // Convert value to int
+        int userNumber = Integer.parseInt(value);
+
+        // Compare userNumber and mysteryNumber
+        if (userNumber < mysteryNumber)
+            textViewInfo.setText(R.string.number_bigger);
+        else if (userNumber > mysteryNumber)
+            textViewInfo.setText(R.string.number_lower);
+
+        // Update color, vibrate and increment count
+        textViewInfo.setTextColor(getResources().getColor(R.color.red));
+        Vibrator vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibe != null) {
+            vibe.vibrate(200);
+        }
+        count++;
+
+        /*Win*/
+        if (userNumber == mysteryNumber) {
+
+            // Update text and color
+            textViewInfo.setText(getString(R.string.win, count));
+            textViewInfo.setTextColor(getResources().getColor(R.color.blue));
+
+            // Hide edit text
+            editTextNumber.setVisibility(View.INVISIBLE);
+
+            // Button replay
+            btnValidate.setText(R.string.replay);
+            btnValidate.setOnClickListener(view -> replay());
+        }
+
+        // Update count
+        textViewCount.setText(getString(R.string.counts, count));
+
+        // Open keyboard
+        editTextNumber.requestFocus();
+    }
+
+    public void replay() {
+        // Reset score
+        count = 0;
+        textViewCount.setText(getString(R.string.counts, count));
+
+        // Reset text and color
+        textViewInfo.setText(getString(R.string.enter_a_number_between_0_and_1000));
+        textViewInfo.setTextColor(getResources().getColor(R.color.grey));
+
+        // Display edit text
+        editTextNumber.setVisibility(View.VISIBLE);
+        editTextNumber.setText(null);
+
+        // Button replay
+        btnValidate.setText(R.string.validate);
+
+        // Choose a new mystery number
+        mysteryNumber = mysteryNumber();
+        Log.d(TAG, "onCreate: " + mysteryNumber);
+
+        btnValidate.setOnClickListener(view -> game());
+    }
+
     @Override
     public void onBackPressed() {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(R.string.leave)
                 .setMessage(R.string.want_leave)
-                .setPositiveButton("Oui", (dialogInterface, i) -> {
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                     super.onBackPressed();
                     finish();
                 })
-                .setNegativeButton("Non", null)
+                .setNegativeButton(R.string.no, null)
                 .show();
         alertDialog.setCanceledOnTouchOutside(false);
     }

@@ -13,4 +13,5 @@
     <color name="secondary_color">#54cb6e</color>z
     <color name="red">#FF0000</color>
     <color name="blue">#0000FF</color>
+    <color name="grey">#363636</color>
 </resources>

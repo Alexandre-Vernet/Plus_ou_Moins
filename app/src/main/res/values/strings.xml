@@ -11,4 +11,6 @@
     <string name="replay">Replay</string>
     <string name="leave">Leave</string>
     <string name="want_leave">Do you want to leave ?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>
