@@ -1,5 +1,6 @@
 package com.ynov.vernet.plusoumoins;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     int mysteryNumber;
     int count = 0;
-
 
     // Debug
     private static final String TAG = "MainActivity";
@@ -51,12 +52,11 @@ public class MainActivity extends AppCompatActivity {
         btnValidate.setOnClickListener(v -> game());
 
         // Enter keyboard
-        editTextNumber.setOnKeyListener((v, keyCode, event) -> {
-            if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+        editTextNumber.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 game();
-                return true;
             }
-            return false;
+            return true;
         });
     }
 
@@ -129,9 +129,14 @@ public class MainActivity extends AppCompatActivity {
         // Update count
         textViewCount.setText(getString(R.string.counts, count));
 
+        // Hide keyboard
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
     }
 
     public void replay() {
+
         // Reset score
         count = 0;
         textViewCount.setText(getString(R.string.counts, count));
